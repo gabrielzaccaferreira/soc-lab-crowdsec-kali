@@ -1,15 +1,13 @@
-# soc-lab-crowdsec-kali
-Laboratório de monitoramento e detecção de eventos utilizando CrowdSec no Kali Linux.
 
-# CrowdSec no Kali Linux: Monitoramento e Detecção de Ataques SSH
+# CrowdSec Lab - Monitoramento e Detecção de Ameaças SSH
 
 ## Objetivo
 
-Configurar um laboratório básico de monitoramento e detecção de eventos de segurança utilizando CrowdSec no Kali Linux.
+Implementar e configurar o CrowdSec para monitoramento de logs, detecção de tentativas de brute force SSH e geração de alertas em ambiente Linux.
 
 ---
 
-## Ambiente
+## Ambiente Utilizado
 
 ### Hardware
 
@@ -17,129 +15,83 @@ Configurar um laboratório básico de monitoramento e detecção de eventos de s
 * 16 GB RAM
 * VMware Workstation
 
-### Máquina Virtual
+### Sistema Operacional
 
-* Sistema Operacional: Kali Linux
-* Interface monitorada: eth0
+* Kali Linux
 
----
-
-## Ferramentas Utilizadas
+### Ferramentas
 
 * CrowdSec
-* OpenSSH Server
+* OpenSSH
 * VMware
-* Windows Host
 
 ---
 
-## Cenário de Teste
+## Objetivos do Laboratório
 
-O objetivo foi validar a capacidade do CrowdSec de monitorar logs SSH e identificar tentativas de autenticação inválidas.
-
-Fluxo utilizado:
-
-Windows Host → SSH → Kali Linux → CrowdSec → Logs → Alertas
+* Instalar e configurar o CrowdSec
+* Monitorar eventos SSH
+* Detectar tentativas de brute force
+* Analisar métricas e alertas
+* Entender o funcionamento de collections, parsers e scenarios
 
 ---
 
-## Etapas Realizadas
+## Configuração
 
-### 1. Instalação do CrowdSec
+Arquivo de aquisição configurado:
 
-Instalação do serviço e validação da versão instalada.
-
-### 2. Ativação do serviço
-
-Configuração para inicialização automática e validação do status do serviço.
-
-### 3. Instalação das coleções
-
-Coleções utilizadas:
-
-* crowdsecurity/linux
-* crowdsecurity/sshd
-
-### 4. Configuração da aquisição de logs
-
-Arquivo configurado:
-
-/etc/crowdsec/acquis.yaml
-
-Configuração utilizada:
-
+```yaml
 source: journalctl
 journalctl_filter:
-
-* "_SYSTEMD_UNIT=ssh.service"
-  labels:
+  - "_SYSTEMD_UNIT=ssh.service"
+labels:
   type: sshd
+```
 
-### 5. Troubleshooting
+---
 
-Durante a configuração foram encontrados alguns problemas:
+## Evidências
 
-* Interface sem obtenção de IP via DHCP
-* Parser SSH não processando eventos
-* Configuração incorreta do acquis.yaml
-* Eventos sendo ignorados por whitelist
+### Status do Serviço
 
-A análise das métricas e dos logs permitiu identificar e corrigir cada etapa.
+![CrowdSec Status](screenshots/crowdsec-status.png)
 
-### 6. Simulação de Ataque
+### Métricas do CrowdSec
 
-Foram realizadas múltiplas tentativas de autenticação SSH inválidas a partir da máquina host.
+![Metrics](screenshots/metrics.png)
 
-Exemplo:
+### Alertas Gerados
 
-ssh kali@IP_DO_KALI
+![Alerts](screenshots/alerts.png)
 
-### 7. Validação
+### Cenários SSH
 
-Comandos utilizados:
-
-sudo cscli metrics
-
-sudo cscli alerts list
-
-sudo cscli decisions list
-
-sudo journalctl -u ssh.service
-
-sudo cscli explain
+![SSH Scenarios](screenshots/ssh-scenarios.png)
 
 ---
 
 ## Aprendizados
 
-* Funcionamento do CrowdSec
-* Estrutura de parsers
-* Coleções e cenários
-* Monitoramento via journalctl
-* Logs SSH
-* Processo de troubleshooting
-* Whitelists
-* Decisões de bloqueio
-* Conceitos de detecção de brute force
+Durante este laboratório foi possível compreender:
+
+* Monitoramento de logs SSH
+* Configuração de acquisition files
+* Collections e Scenarios
+* Parsers do CrowdSec
+* Métricas e Alertas
+* Conceitos de brute force detection
+* Troubleshooting em Linux
+* Conceitos básicos de SOC e Blue Team
 
 ---
 
 ## Próximos Passos
 
-* Instalar Suricata
-* Criar ambiente Wazuh
-* Integrar múltiplas fontes de log
-* Implementar arquitetura básica de SOC doméstico
+* Integração com Suricata
+* Integração com Wazuh
+* Correlação de eventos
+* Construção de um mini SOC em laboratório
 
----
-
-## Habilidades Desenvolvidas
-
-* Linux
-* Segurança de Redes
-* Análise de Logs
-* Monitoramento de Eventos
-* Troubleshooting
-* Blue Team
-* SIEM
-* SOC
+```
+```
