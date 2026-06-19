@@ -1,4 +1,8 @@
+# CrowdSec Lab — Monitoramento e Detecção de Ameaças SSH
 
+Laboratório prático de monitoramento de logs SSH com CrowdSec no Kali Linux, focado na detecção de brute force, análise de alertas, métricas e cenários de Threat Intelligence colaborativa.
+
+---
 
 ## Sumário
 
@@ -11,7 +15,7 @@
 - [Próximos Passos](#próximos-passos)
 - [Laboratórios do SOC Home Lab](#-laboratórios-do-soc-home-lab)
 
-# CrowdSec Lab - Monitoramento e Detecção de Ameaças SSH
+---
 
 ## Objetivo
 
@@ -104,10 +108,6 @@ Durante este laboratório foi possível compreender:
 * Integração com Wazuh
 * Correlação de eventos
 * Construção de um mini SOC em laboratório
-
-```
-```
-
 
 ---
 
